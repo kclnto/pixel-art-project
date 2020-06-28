@@ -1,41 +1,34 @@
-const myColor = document.querySelector("#colorPicker").value;
-// Select color input
+// Select size form
 const mySize = document.querySelector("#sizePicker");
-// Select size input
-const myTable = document.querySelector("#pixelCanvas");
 // Variable to shorten calling on the grid
-const submit = document.querySelector("[type = 'submit']");
-// Variable to shorten the submit option
+const myTable = document.querySelector("#pixelCanvas");
 
 
-submit.addEventListener("click", function() {
 // Creates the grid after user selects "submit"
+mySize.addEventListener("submit", function() {
   event.preventDefault();
   makeGrid();
 });
 
-
+// Creates grid based on user height and weight form
 function makeGrid() {
-// Creates grid based on user height and weight input
   event.preventDefault();
-  const myHeight = document.querySelector("#inputHeight").value;
   // User selected height
-  const myWidth = document.querySelector("#inputWidth").value;
+  const myHeight = document.querySelector("#inputHeight").value;
   // User selected width
-  myTable.innerHTML = ""
+  const myWidth = document.querySelector("#inputWidth").value;
   // Clears previous grid, if applicable
-  for (h = 0; h <= myHeight; h++) {
+  myTable.innerHTML = ""
+  for (h = 1; h <= myHeight; h++) {
     const newRow = myTable.insertRow(-1);
-    for (w = 0; w <= myWidth; w++) {
+    for (w = 1; w <= myWidth; w++) {
       newCell = newRow.insertCell(0);
+      // Allows user to change to background color of a cell to chosen color
+      newCell.addEventListener("click", function() {
+        let myColor = document.querySelector("#colorPicker").value;
+        event.target.style.backgroundColor = myColor;
+        event.preventDefault();
+      });
     }
   }
 }
-
-
-myTable.addEventListener("click", function() {
-// Allows user to change to background color of a cell to chosen color
-  let myColor = document.querySelector("#colorPicker").value;
-  event.target.style.backgroundColor = myColor;
-  event.preventDefault();
-});
